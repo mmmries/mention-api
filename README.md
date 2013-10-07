@@ -1,6 +1,6 @@
 # Mention::Api
 
-TODO: Write a gem description
+A nice ruby interface to wrap the [Mention.net](mention.net) API.
 
 ## Installation
 
@@ -16,9 +16,15 @@ Or install it yourself as:
 
     $ gem install mention-api
 
-## Usage
+## Developing
 
-TODO: Write usage instructions here
+There are a list of acceptance specs that run against the live mention service. In order to run these specs you will need to create a file at spec/fixtures/credentials.yml. The contents should look like this:
+
+```yaml
+---
+:account_id: your-account-id-here
+:access_token: your-access-token-here
+```
 
 ## Contributing
 
