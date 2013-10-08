@@ -1,0 +1,1 @@
+{"form":{"children":{"name":[],"primary_keyword":[],"included_keywords":[],"excluded_keywords":[],"required_keywords":{"children":[[],[],[]]},"languages":{"errors":["Please select at least one language"]},"sources":{"errors":["Please select at least one source"]},"noise_detection":[],"sentiment_analysis":[],"blocked_sites":[]}},"max_alerts_exceeded":false,"max_alerts":20}

@@ -30,6 +30,13 @@ module Mention
       Time.parse(account_info['account']['created_at'])
     end
 
+    def add(alert)
+      data = alert.attributes.reject{|k,v| k == :id}
+      str = resource['/alerts'].post JSON.generate(data), :content_type => 'application/json'
+      @alerts = nil
+      Mention::Alert.new(JSON.parse(str)['alert'])
+    end
+
     private
     attr_reader :account_id, :access_token
 
