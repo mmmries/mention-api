@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper_acceptance'
 
 describe "Managing Alerts" do
   include_context "credentials"

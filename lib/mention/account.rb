@@ -6,7 +6,28 @@ module Mention
     end
 
     def alerts
-      @alerts ||= JSON.parse(resource['alerts'].get)
+      @alerts ||= begin
+        raw_data = JSON.parse(resource['alerts'].get)
+        raw_data['alerts'].map do |hash|
+          Mention::Alert.new(hash)
+        end
+      end
+    end
+
+    def name
+      account_info['account']['name']
+    end
+
+    def id
+      account_info['account']['id']
+    end
+
+    def email
+      account_info['account']['email']
+    end
+
+    def created_at
+      Time.parse(account_info['account']['created_at'])
     end
 
     private
@@ -15,6 +36,10 @@ module Mention
     def resource
       @resource ||= RestClient::Resource.new("https://api.mention.net/api/accounts/#{account_id}",
         headers: {'Authorization' => "Bearer #{access_token}", "Accept" => "application/json"})
+    end
+
+    def account_info
+      @account_info ||= JSON.parse(resource.get)
     end
   end
 end

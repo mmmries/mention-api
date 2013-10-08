@@ -26,6 +26,16 @@ There are a list of acceptance specs that run against the live mention service. 
 :access_token: your-access-token-here
 ```
 
+The unit tests for this project are under spec/lib. These need to be run separately from the acceptance tests since they use webmock to stub out all of the HTTP requests, whereas the acceptance tests specifically need to reach out the actual web service.
+
+```bash
+rspec spec/lib
+...
+
+rspec spec/acceptance
+...
+```
+
 ## Contributing
 
 1. Fork it

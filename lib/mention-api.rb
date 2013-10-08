@@ -1,3 +1,5 @@
 require 'json'
 require 'rest-client'
+require 'virtus'
 require 'mention/account'
+require 'mention/alert'
