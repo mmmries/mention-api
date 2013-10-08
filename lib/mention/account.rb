@@ -31,10 +31,9 @@ module Mention
     end
 
     def add(alert)
-      data = alert.attributes.reject{|k,v| k == :id}
-      str = resource['/alerts'].post JSON.generate(data), :content_type => 'application/json'
-      @alerts = nil
-      Mention::Alert.new(JSON.parse(str)['alert'])
+      creator = AlertCreator.new(resource, alert)
+      @alerts = nil if creator.valid?
+      creator.created_alert
     end
 
     private

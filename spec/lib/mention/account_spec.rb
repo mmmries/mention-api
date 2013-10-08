@@ -36,13 +36,12 @@ describe Mention::Account do
   end
 
   it "reports validation errors when creating a new alert" do
-    pending
     stub_request(:post, "https://api.mention.net/api/accounts/abc/alerts").
-      with(:body => {"name"=>"ROM", "noise_detection"=>true, "primary_keyword"=>"ROM", "required_keywords"=>["ruby", "object", "mapper"], "sentiment_analysis"=>false},
-          :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer def', 'Content-Length'=>'302', 'Content-Type'=>'application/json'}).
-      to_return(:status => 200, :body => File.read("spec/fixtures/post_account_alerts_failed.json"))    
+      with(:body => "{\"name\":\"ROM\",\"primary_keyword\":\"ROM\",\"included_keywords\":[],\"excluded_keywords\":[],\"required_keywords\":[\"ruby\",\"object\",\"mapper\"],\"noise_detection\":true,\"sentiment_analysis\":false,\"languages\":[],\"sources\":[]}",
+          :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer def', 'Content-Type'=>'application/json'}).
+      to_return(:status => 200, :body => File.read("spec/fixtures/post_account_alerts_failed.json"))
 
-    alert = Mention::Alert.new(name: 'ROM', primary_keyword: 'ROM', required_keywords: ['ruby', 'object', 'mapper'])
+    alert = Mention::Alert.new(name: 'ROM', primary_keyword: 'ROM', required_keywords: ['ruby', 'object', 'mapper'], languages: [], sources: [])
     ->{
       account.add(alert)
     }.should raise_error(Mention::ValidationError, /language/)
