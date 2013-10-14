@@ -10,6 +10,7 @@ describe Mention::Account do
 
     account.alerts.size.should == 1
     account.alerts.first.should be_a(Mention::Alert)
+    account.alerts.first.id.should == '459069'
   end
 
   it "queries basic information about the account" do
@@ -45,5 +46,18 @@ describe Mention::Account do
     ->{
       account.add(alert)
     }.should raise_error(Mention::ValidationError, /language/)
+  end
+
+  it "removes an alert from the account" do
+    stub_request(:get, "https://api.mention.net/api/accounts/abc/alerts").
+      with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer def', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => File.read("spec/fixtures/get_account_alerts.json"))
+
+    stub_request(:delete, "https://api.mention.net/api/accounts/abc/alerts/459069/shares/209170_64b8a6q53wkks8k0k80c04o8osskc8w0scs8gsk4gco8kg8csw").
+      with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer def'}).
+      to_return(:status => 200, :body => "true")
+
+    alert = account.alerts.first
+    alert.remove_from(account)
   end
 end

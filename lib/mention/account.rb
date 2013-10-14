@@ -36,6 +36,10 @@ module Mention
       creator.created_alert
     end
 
+    def remove(alert, share)
+      resource["/alerts/#{alert.id}/shares/#{share.id}"].delete
+    end
+
     private
     attr_reader :account_id, :access_token
 

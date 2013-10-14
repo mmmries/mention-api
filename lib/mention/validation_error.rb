@@ -1,4 +1,4 @@
 module Mention
-  class ValidationError < RuntimeError
+  class ValidationError < Error
   end
 end
