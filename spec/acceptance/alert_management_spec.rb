@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe "Managing Alerts" do
+describe "Managing Alerts", :acceptance => true do
   include_context "credentials"
 
   it "returns a list of alerts" do
