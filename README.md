@@ -1,7 +1,6 @@
 [![Version](http://allthebadges.io/hqmq/mention-api/badge_fury.png)](http://allthebadges.io/hqmq/mention-api/badge_fury)
 [![Dependencies](http://allthebadges.io/hqmq/mention-api/gemnasium.png)](http://allthebadges.io/hqmq/mention-api/gemnasium)
 [![Build Status](http://allthebadges.io/hqmq/mention-api/travis.png)](http://allthebadges.io/hqmq/mention-api/travis)
-[![Coverage](http://allthebadges.io/hqmq/mention-api/coveralls.png)](http://allthebadges.io/hqmq/mention-api/coveralls)
 [![Code Climate](http://allthebadges.io/hqmq/mention-api/code_climate.png)](http://allthebadges.io/hqmq/mention-api/code_climate)
 
 # Mention::Api
