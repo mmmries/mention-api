@@ -16,7 +16,11 @@ module Mention
 
     def remove_from(account)
       share = share_for(account)
-      account.remove(self, share)
+      account.remove_alert(self, share)
+    end
+
+    def mentions(account, params = {})
+      account.fetch_mentions(self, params)
     end
 
     private

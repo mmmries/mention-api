@@ -36,8 +36,12 @@ module Mention
       creator.created_alert
     end
 
-    def remove(alert, share)
+    def remove_alert(alert, share)
       resource["/alerts/#{alert.id}/shares/#{share.id}"].delete
+    end
+
+    def fetch_mentions(alert, params = {})
+      resource["/alerts/#{alert.id}/mentions"].get params: params
     end
 
     private
