@@ -1,6 +1,6 @@
 # Mention::Api
 
-A nice ruby interface to wrap the [Mention.net](mention.net) API.
+A nice ruby interface to wrap the [Mention.net](http://mention.net/) API.
 
 ## Installation
 

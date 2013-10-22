@@ -27,7 +27,9 @@ module Mention
     end
 
     def request_params
-      alert.attributes.reject{|k,v| k == :id}
+      alert.attributes
+        .reject{|k,v| k == :id}
+        .reject{|k,v| k == :shares}
     end
 
     def validate_response!
