@@ -7,6 +7,8 @@ require 'virtus'
 require 'mention/account'
 require 'mention/share'
 require 'mention/alert'
+require 'mention/mention'
+require 'mention/mention_list'
 
 # utility classes
 require 'mention/error'

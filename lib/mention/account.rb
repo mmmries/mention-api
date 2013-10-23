@@ -9,7 +9,7 @@ module Mention
       @alerts ||= begin
         raw_data = JSON.parse(resource['alerts'].get)
         raw_data['alerts'].map do |hash|
-          Mention::Alert.new(hash)
+          Alert.new(hash)
         end
       end
     end
@@ -41,7 +41,8 @@ module Mention
     end
 
     def fetch_mentions(alert, params = {})
-      resource["/alerts/#{alert.id}/mentions"].get params: params
+      raw_data = JSON.parse(resource["/alerts/#{alert.id}/mentions"].get params: params)
+      MentionList.new(raw_data)
     end
 
     private

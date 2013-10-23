@@ -5,7 +5,7 @@ module Mention
     end
 
     def created_alert
-      @created_alert ||= Mention::Alert.new(response['alert'])
+      @created_alert ||= Alert.new(response['alert'])
     end
 
     def valid?

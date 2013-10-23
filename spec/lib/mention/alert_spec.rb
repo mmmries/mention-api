@@ -13,7 +13,7 @@ describe Mention::Alert do
 
     mentions = alert.mentions(account)
     mentions.should be_a(Mention::MentionList)
-    mentions.size.should == 9
+    mentions.count.should == 9
   end
 
   it "fetches a list of mentions since a given id" do
@@ -23,6 +23,6 @@ describe Mention::Alert do
 
     mentions = alert.mentions(account, since_id: "3199497112")
     mentions.should be_a(Mention::MentionList)
-    mentions.size.should == 3
+    mentions.count.should == 3
   end
 end
