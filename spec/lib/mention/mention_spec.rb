@@ -10,6 +10,6 @@ describe Mention::Mention do
     mention.title.should start_with('SPRUG')
     mention.description.should start_with('Got even more excited about')
     mention.url.should == "https://plus.google.com/communities/117927540789820622012"
-    mention.published_at.to_i.should == Time.parse('2013-10-18 15:57:08').to_i
+    mention.published_at.to_i.should == Time.parse('2013-10-18 21:57:08Z').to_i
   end
 end
