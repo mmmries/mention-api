@@ -45,6 +45,12 @@ module Mention
       MentionList.new(raw_data)
     end
 
+    def update_mention_attr(alert, mention, attributes = {})
+      headers = {'Content-Type' => 'application/json'}
+      payload = attributes.to_json
+      resource["/alerts/#{alert.id}/mentions/#{mention.id}"].put(payload, headers)
+    end
+
     private
     attr_reader :account_id, :access_token
 

@@ -1,9 +1,13 @@
 require 'spec_helper_unit'
 
 describe Mention::Mention do
+  let(:account){ Mention::Account.new(account_id: 'abc', access_token: 'def') }
   let(:json){ File.read('spec/fixtures/mention_list_default.json') }
   let(:mention_params){ JSON.parse(json)['mentions'].first }
   let(:mention){ Mention::Mention.new(mention_params) }
+  let(:alert_json){ File.read('spec/fixtures/get_account_alerts.json') }
+  let(:alert_params){ JSON.parse(alert_json)['alerts'].first }
+  let(:alert){ Mention::Alert.new(alert_params) }
 
   it "has some basic information" do
     mention.id.should == 3253260762
@@ -15,5 +19,15 @@ describe Mention::Mention do
     mention.source_name.should == "google.com"
     mention.source_url.should == "https://plus.google.com"
     mention.language_code == "en"
+    mention.trashed == false
+  end
+
+  it 'updates some attributes' do
+    stub_request(:put, "https://api.mention.net/api/accounts/abc/alerts/459069/mentions/3253260762").
+       with(:body => "{\"trashed\":true}",
+            :headers => {'Accept'=>'application/json', 'Authorization'=>'Bearer def'}).
+       to_return(:status => 200, :body => "", :headers => {})
+
+    mention.update_attr(account, alert, trashed: true)
   end
 end

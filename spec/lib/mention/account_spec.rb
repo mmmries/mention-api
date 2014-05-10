@@ -60,4 +60,10 @@ describe Mention::Account do
     alert = account.alerts.first
     alert.remove_from(account)
   end
+
+  it "updates a mention for an alert" do
+    stub_request(:get, "https://api.mention.net/api/accounts/abc/alerts").
+      with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer def', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => File.read("spec/fixtures/get_account_alerts.json"))
+  end
 end

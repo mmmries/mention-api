@@ -12,6 +12,11 @@ module Mention
       attribute :source_name, String
       attribute :source_url, String
       attribute :language_code, String
+      attribute :trashed, Boolean
+    end
+
+    def update_attr(account, alert, attributes = {})
+      account.update_mention_attr(alert, self, attributes)
     end
   end
 end
