@@ -22,13 +22,17 @@ describe Mention::Mention do
     mention.trashed == false
   end
 
-  it 'updates some attribute' do
-    stub_request(:put, "https://api.mention.net/api/accounts/abc/alerts/459069/mentions/3253260762").
-       with(:body => "{\"trashed\":true}",
-            :headers => {'Accept'=>'application/json', 'Authorization'=>'Bearer def'}).
-       to_return(:status => 200, :body => File.read("spec/fixtures/mention_update_attr.json"))
+  describe '#update_attr' do
+    it 'updates some attribute' do
+      stub_request(:put, "https://api.mention.net/api/accounts/abc/alerts/459069/mentions/3253260762").
+        with(:body => "{\"trashed\":true}",
+             :headers => {'Accept'=>'application/json', 'Authorization'=>'Bearer def'}).
+             to_return(:status => 200, :body => File.read("spec/fixtures/mention_update_attr.json"))
 
-    new_mention = mention.update_attr(account, alert, trashed: true)
-    new_mention.trashed.should == true
+      new_mention = mention.update_attr(account, alert, trashed: true)
+      new_mention.trashed.should == true
+      a_request(:put, 'https://api.mention.net/api/accounts/abc/alerts/459069/mentions/3253260762').
+        with(body: "{\"trashed\":true}").should have_been_made.once
+    end
   end
 end
