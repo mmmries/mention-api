@@ -48,7 +48,9 @@ module Mention
     def update_mention_attr(alert, mention, attributes = {})
       headers = {'Content-Type' => 'application/json'}
       payload = attributes.to_json
-      resource["/alerts/#{alert.id}/mentions/#{mention.id}"].put(payload, headers)
+      raw_data = JSON.parse(resource["/alerts/#{alert.id}/mentions/#{mention.id}"].put(payload, headers))
+
+      Mention.new(raw_data['mention'])
     end
 
     private
